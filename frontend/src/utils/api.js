@@ -1,6 +1,6 @@
 // Base URL of our FastAPI server
 // Vite uses import.meta.env for environment variables
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const BASE_URL = "https://ml-model-loan-default-prediction.onrender.com";
 
 async function apiFetch(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`;

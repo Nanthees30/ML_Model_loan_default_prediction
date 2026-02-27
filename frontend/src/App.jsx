@@ -30,7 +30,7 @@ function App() {
         playsInline
         className="fixed top-0 left-0 w-full h-full object-cover -z-10"
       >
-        <source src=".././public/Loan_Prediction_AI_Background_Animation_Template.mp4" type="video/mp4" />
+        <source src="/bg_video.mp4" type="video/mp4" />
       </video>
       <div className="min-h-screen bg-slate-900/80 p-8">
         <div className="max-w-4xl mx-auto">
