@@ -1,0 +1,22 @@
+{
+  "model_name": "Random Forest",
+  "accuracy": 0.9333,
+  "roc_auc": 0.9952,
+  "is_scaled": false,
+  "features": [
+    "income",
+    "loan_amount",
+    "credit_score",
+    "past_defaults",
+    "deposit_balance"
+  ],
+  "target": "default",
+  "classes": [
+    0,
+    1
+  ],
+  "class_labels": {
+    "0": "No Default",
+    "1": "Default"
+  }
+}

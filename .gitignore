@@ -1,0 +1,18 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+
+# Node / React
+frontend/node_modules/
+frontend/dist/
+
+# System Files
+.DS_Store
