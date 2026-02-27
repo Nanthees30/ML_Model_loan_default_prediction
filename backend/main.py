@@ -39,12 +39,13 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://ml-model-loan-default-prediction.vercel.app",
+        "https://ml-model-loan-default-prediction-git-main-nanthees30s-projects.vercel.app",
         "http://localhost:5173"
     ],
-    allow_origin_regex=r"https://ml-model-loan-default-prediction-.*\.vercel\.app",
+    allow_origin_regex=r"https://ml-model-loan-default-prediction.*\.vercel\.app",
     allow_credentials=True,
-    allow_methods=["*"],      # Allow GET, POST, PUT, DELETE etc
-    allow_headers=["*"],      # Allow all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Load Model on Startup
