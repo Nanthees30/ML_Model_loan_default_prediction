@@ -20,7 +20,6 @@ function ResultCard({ result }) {
             <FaCheckCircle className="text-green-500 drop-shadow-lg" />
           )}
         </div>
-
         <div>
           <h3 className="text-2xl font-bold text-white">{result.prediction_label}</h3>
           <p className="text-sm opacity-80">
@@ -65,22 +64,23 @@ function ResultCard({ result }) {
 }
 
 // Main Predict Page
-export default function PredictPage() {
-  const [dynamicFields, setDynamicFields] = useState([]); // Store schema from API
-  const [form,    setForm]    = useState({});             // Form field values
-  const [result,  setResult]  = useState(null);           // API response
-  const [loading, setLoading] = useState(false);          // Show spinner
-  const [error,   setError]   = useState(null);           // Error message
+// backendReady prop — passed from App.jsx after wake-up ping succeeds
+export default function PredictPage({ backendReady }) {
+  const [dynamicFields, setDynamicFields] = useState([]);
+  const [form,    setForm]    = useState({});
+  const [result,  setResult]  = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error,   setError]   = useState(null);
 
-  // Fetch model features on component mount
+  // Only fetch model info AFTER backend is confirmed alive
   useEffect(() => {
+    if (!backendReady) return; // Wait for wake-up ping to succeed
+
     async function fetchModelData() {
       try {
         const info = await getModelInfo();
-        
-        // Convert API array ['income', 'loan_amount'] into React field objects
+
         const generatedFields = info.features.map(feature => {
-          // Format 'loan_amount' to 'Loan Amount'
           const label = feature.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
           return {
             name: feature,
@@ -89,13 +89,12 @@ export default function PredictPage() {
             placeholder: `Enter ${label.toLowerCase()}`
           };
         });
-        
+
         setDynamicFields(generatedFields);
 
-        // Initialize form state dynamically to avoid uncontrolled input warnings
         const initialFormState = {};
         info.features.forEach(feature => {
-          initialFormState[feature] = ""; 
+          initialFormState[feature] = "";
         });
         setForm(initialFormState);
 
@@ -103,8 +102,9 @@ export default function PredictPage() {
         setError("Could not load model features. Make sure the backend is running.");
       }
     }
+
     fetchModelData();
-  }, []);
+  }, [backendReady]); // Re-runs when backendReady flips to true
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -145,12 +145,14 @@ export default function PredictPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              {/* Fallback while loading fields */}
+              {/* Show loading state while waiting for backend */}
               {dynamicFields.length === 0 && !error && (
-                <p className="text-slate-400 text-sm col-span-2">Loading form fields from AI model...</p>
+                <div className="col-span-2 flex items-center gap-2 text-slate-400 text-sm">
+                  <div className="animate-spin w-4 h-4 border-2 border-slate-400 border-t-transparent rounded-full" />
+                  <span>Loading form fields from model...</span>
+                </div>
               )}
 
-              {/* Dynamically render fields based on backend metadata */}
               {dynamicFields.map((field) => (
                 <div key={field.name}>
                   <label className="block text-xs text-slate-400 mb-1">
