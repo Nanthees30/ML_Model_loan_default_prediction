@@ -41,6 +41,7 @@ app.add_middleware(
         "https://ml-model-loan-default-prediction.vercel.app",
         "http://localhost:5173"
     ],
+    allow_origin_regex=r"https://ml-model-loan-default-prediction-.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],      # Allow GET, POST, PUT, DELETE etc
     allow_headers=["*"],      # Allow all headers
