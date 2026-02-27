@@ -49,9 +49,9 @@ app.add_middleware(
 # Load Model on Startup
 # These are module-level variables - load once, use many times
 # Loading on every request would be slow!
-ODEL_PATH    = os.path.join(os.path.dirname(__file__), "..", "models", "loan_default_model.pkl")
-SCALER_PATH   = os.path.join(os.path.dirname(__file__), "..", "models", "scaler.pkl")
-METADATA_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "model_metadata.json")
+MODEL_PATH    = "models/loan_default_model.pkl"
+SCALER_PATH   = "models/scaler.pkl"
+METADATA_PATH = "models/model_metadata.json"
 
 model    = None
 scaler   = None
