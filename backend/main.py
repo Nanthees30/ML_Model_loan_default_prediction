@@ -37,7 +37,10 @@ app = FastAPI(
 #        This middleware ALLOWS React to call our API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://ml-model-loan-default-prediction.vercel.app",
+        "http://localhost:5173"
+    ],
     allow_credentials=True,
     allow_methods=["*"],      # Allow GET, POST, PUT, DELETE etc
     allow_headers=["*"],      # Allow all headers
