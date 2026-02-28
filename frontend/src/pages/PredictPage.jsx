@@ -115,9 +115,12 @@ export default function PredictPage({ backendReady }) {
 
   function handleChange(e) {
     const { name, value } = e.target;
+    if (name === "credit_score" && value.length > 3) {
+      return; 
+    }
     setForm((prev) => ({
       ...prev,
-      [name]: parseFloat(value) || 0,
+      [name]: value === "" ? "" : parseFloat(value),
     }));
   }
 

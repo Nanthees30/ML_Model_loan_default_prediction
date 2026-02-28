@@ -32,7 +32,7 @@ function WakingUpBanner() {
       <div>
         <p className="text-yellow-400 text-sm font-semibold">Waking up backend server...</p>
         <p className="text-yellow-400/70 text-xs mt-0.5">
-          Free tier spins down after inactivity. Please wait 30–60 seconds ⏳
+          Free tier spins down after inactivity. Please wait 30–60 seconds
         </p>
       </div>
     </div>
