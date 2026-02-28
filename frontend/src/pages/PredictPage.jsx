@@ -79,6 +79,13 @@ export default function PredictPage({ backendReady }) {
     async function fetchModelData() {
       try {
         const info = await getModelInfo();
+        const placeholderExamples = {
+          income: "Yearly Income",
+          loan_amount: "e.g., 15000",
+          credit_score: "e.g., 720 (300-850)",
+          past_defaults: "e.g., 0",
+          deposit_balance: "e.g., 10000"
+        };
 
         const generatedFields = info.features.map(feature => {
           const label = feature.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
@@ -86,7 +93,7 @@ export default function PredictPage({ backendReady }) {
             name: feature,
             label: label,
             type: "number",
-            placeholder: `Enter ${label.toLowerCase()}`
+            placeholder: placeholderExamples[feature] || `Enter ${label.toLowerCase()}`
           };
         });
 
